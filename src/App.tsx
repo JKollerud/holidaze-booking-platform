@@ -1,28 +1,37 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import { useAuth } from './hooks/useAuth';
+// import Layout from './components/layout/Layout';
 import { ROUTES } from './constants/routes';
 
 import HomePage from './pages/HomePage';
 import VenuesPage from './pages/VenuesPage';
 import VenueDetailsPage from './pages/VenueDetailsPage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 export default function App() {
+  const { user, login, register, logout } = useAuth();
+
   return (
     <BrowserRouter>
-      <main className="min-h-screen">
-        <Routes>
-          <Route path={ROUTES.home} element={<HomePage />} />
-          <Route path={ROUTES.venues} element={<VenuesPage />} />
-          <Route path={ROUTES.venueDetails} element={<VenueDetailsPage />} />
-          <Route path={ROUTES.login} element={<LoginPage />} />
-          <Route path={ROUTES.register} element={<RegisterPage />} />
-          <Route path={ROUTES.dashboard} element={<DashboardPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </main>
+      <Routes
+        element={
+          <Layout
+            user={user}
+            onLogin={login}
+            onRegister={register}
+            onLogout={logout}
+          />
+        }
+      >
+        <Route path={ROUTES.home} element={<HomePage />} />
+        <Route path={ROUTES.venues} element={<VenuesPage />} />
+        <Route path={ROUTES.venueDetails} element={<VenueDetailsPage />} />
+        <Route path={ROUTES.login} element={<HomePage />} />
+        <Route path={ROUTES.register} element={<HomePage />} />
+        <Route path={ROUTES.dashboard} element={<DashboardPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </BrowserRouter>
   );
 }
