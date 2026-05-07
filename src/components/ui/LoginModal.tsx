@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import Modal from './Modal';
 import { NOROFF_EMAIL_REGEX } from '../../services/authService';
-import type { LoginBody } from '../../types/api';
+import type { AuthResponse, LoginBody } from '../../types/api';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   onSwitchToRegister: () => void;
-  onLogin: (body: LoginBody) => Promise<void>;
+  onLogin: (body: LoginBody) => Promise<AuthResponse>;
 }
 
 export default function LoginModal({

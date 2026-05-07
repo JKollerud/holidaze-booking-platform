@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import { useAuth } from './hooks/useAuth';
-// import Layout from './components/layout/Layout';
+import { useAuth } from './hooks/useAuth';
+import Layout from './components/layout/Layout';
 import { ROUTES } from './constants/routes';
 
 import HomePage from './pages/HomePage';
@@ -14,23 +14,26 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Routes
-        element={
-          <Layout
-            user={user}
-            onLogin={login}
-            onRegister={register}
-            onLogout={logout}
-          />
-        }
-      >
-        <Route path={ROUTES.home} element={<HomePage />} />
-        <Route path={ROUTES.venues} element={<VenuesPage />} />
-        <Route path={ROUTES.venueDetails} element={<VenueDetailsPage />} />
-        <Route path={ROUTES.login} element={<HomePage />} />
-        <Route path={ROUTES.register} element={<HomePage />} />
-        <Route path={ROUTES.dashboard} element={<DashboardPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Layout
+              user={user}
+              onLogin={login}
+              onRegister={register}
+              onLogout={logout}
+            />
+          }
+        >
+          <Route index element={<HomePage />} />
+          <Route path={ROUTES.venues} element={<VenuesPage />} />
+          <Route path={ROUTES.venueDetails} element={<VenueDetailsPage />} />
+          <Route path={ROUTES.dashboard} element={<DashboardPage />} />
+          <Route path={ROUTES.login} element={<HomePage />} />
+          <Route path={ROUTES.register} element={<HomePage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
