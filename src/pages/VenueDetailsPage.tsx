@@ -223,29 +223,18 @@ export default function VenueDetailsPage() {
 
       {bookSuccess ? (
         <div role="status" className="alert-success text-center">
-          🎉 Booking confirmed! Check your dashboard.
+          Booking confirmed! Check your dashboard.
         </div>
       ) : (
         <form onSubmit={handleBook} className="space-y-3" noValidate>
           <div>
-            <label htmlFor="date-from" className="sr-only">
+            <label
+              htmlFor="date-from"
+              className="block font-body text-xs font-medium text-text-secondary mb-1"
+            >
               Check-in date
             </label>
             <div className="flex items-center bg-bg border border-border rounded-lg px-3 gap-2 focus-within:ring-2 focus-within:ring-secondary transition">
-              <svg
-                className="w-4 h-4 text-text-secondary shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
               <input
                 id="date-from"
                 type="date"
@@ -258,24 +247,13 @@ export default function VenueDetailsPage() {
             </div>
           </div>
           <div>
-            <label htmlFor="date-to" className="sr-only">
+            <label
+              htmlFor="date-to"
+              className="block font-body text-xs font-medium text-text-secondary mb-1"
+            >
               Check-out date
             </label>
             <div className="flex items-center bg-bg border border-border rounded-lg px-3 gap-2 focus-within:ring-2 focus-within:ring-secondary transition">
-              <svg
-                className="w-4 h-4 text-text-secondary shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
               <input
                 id="date-to"
                 type="date"
@@ -288,7 +266,10 @@ export default function VenueDetailsPage() {
             </div>
           </div>
           <div>
-            <label htmlFor="book-guests" className="sr-only">
+            <label
+              htmlFor="book-guests"
+              className="block font-body text-xs font-medium text-text-secondary mb-1"
+            >
               Number of guests
             </label>
             <div className="flex items-center bg-bg border border-border rounded-lg px-3 gap-2 focus-within:ring-2 focus-within:ring-secondary transition">
@@ -333,7 +314,7 @@ export default function VenueDetailsPage() {
           <button
             type="submit"
             disabled={bookLoading}
-            className="btn-cta w-full py-3 text-base"
+            className="w-full py-3 text-base rounded-lg font-heading font-bold bg-cta hover:bg-cta-hover text-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed shadow-md"
           >
             {bookLoading ? 'Booking…' : 'Book now'}
           </button>

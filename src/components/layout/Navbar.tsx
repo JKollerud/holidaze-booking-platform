@@ -90,14 +90,14 @@ export default function Navbar({ user, onLogin, onRegister, onLogout }: Props) {
               <div className="flex items-center gap-2">
                 <button
                   onClick={openRegister}
-                  className="font-body text-sm text-white/80 hover:text-white transition-colors"
+                  className="font-body text-sm text-white hover:text-secondary transition-colors underline underline-offset-2"
                 >
                   Register
                 </button>
                 <span className="text-white/40 text-sm">or</span>
                 <button
                   onClick={openLogin}
-                  className="btn-cta text-sm px-4 py-2 rounded-lg"
+                  className="bg-cta hover:bg-cta-hover text-white font-heading font-semibold text-sm px-5 py-2 rounded-lg transition-colors border-2 border-white/20"
                 >
                   Login
                 </button>

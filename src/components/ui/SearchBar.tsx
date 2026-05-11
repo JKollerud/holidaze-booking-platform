@@ -117,14 +117,14 @@ export default function SearchBar() {
         </div>
         <button
           type="submit"
-          className="btn-cta w-full sm:hidden mt-2 py-3 text-base rounded-lg"
+          className="w-full sm:hidden mt-2 py-3 text-base rounded-lg font-heading font-semibold bg-secondary text-white hover:bg-secondary/90 transition-colors"
         >
           Search
         </button>
         <div className="hidden sm:flex mt-2 justify-end">
           <button
             type="submit"
-            className="btn-cta px-8 py-2.5 rounded-lg text-sm whitespace-nowrap"
+            className="px-8 py-2.5 rounded-lg text-sm font-heading font-semibold bg-secondary text-white hover:bg-secondary/90 transition-colors whitespace-nowrap"
           >
             Search
           </button>

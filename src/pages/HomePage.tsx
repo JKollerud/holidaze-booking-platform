@@ -61,7 +61,7 @@ export default function HomePage() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/55"
+          className="absolute inset-0 bg-linear-to-b from-black/20 to-black/55"
           aria-hidden="true"
         />
         <div className="relative text-center text-white px-4">

@@ -30,8 +30,6 @@ export default function App() {
           <Route path={ROUTES.venues} element={<VenuesPage />} />
           <Route path={ROUTES.venueDetails} element={<VenueDetailsPage />} />
           <Route path={ROUTES.dashboard} element={<DashboardPage />} />
-          <Route path={ROUTES.login} element={<HomePage />} />
-          <Route path={ROUTES.register} element={<HomePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
