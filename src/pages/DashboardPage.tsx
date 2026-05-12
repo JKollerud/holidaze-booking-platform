@@ -154,10 +154,13 @@ export default function DashboardPage() {
           </div>
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setEditMode(!editMode)}
+              onClick={() => {
+                setEditMode(!editMode);
+                setSaveMsg('');
+              }}
               className="btn-outline text-sm px-4 py-2 rounded-lg"
             >
-              {editMode ? 'Cancel' : 'Edit profile'}
+              Edit profile
             </button>
             {user.venueManager && (
               <button
@@ -238,6 +241,16 @@ export default function DashboardPage() {
               className="btn-primary px-6 py-2.5 rounded-lg"
             >
               {saving ? 'Saving…' : 'Save changes'}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setEditMode(false);
+                setSaveMsg('');
+              }}
+              className="btn-outline px-6 py-2.5 rounded-lg"
+            >
+              Cancel
             </button>
           </form>
         )}
