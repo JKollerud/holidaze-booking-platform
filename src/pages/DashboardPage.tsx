@@ -7,14 +7,13 @@ import type { Booking, Venue } from '../types/api';
 import VenueCard from '../components/venue/VenueCard';
 import VenueFormModal from '../components/venue/VenueFormModal';
 
-type Tab = 'bookings' | 'favorites' | 'venues';
+type Tab = 'bookings' | 'venues';
 
 const FALLBACK_BANNER =
   'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&auto=format&fit=crop&q=60';
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'bookings', label: 'Your bookings' },
-  { key: 'favorites', label: 'Your favorites' },
   { key: 'venues', label: 'Your venues' },
 ];
 
@@ -127,7 +126,6 @@ export default function DashboardPage() {
         />
       </div>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Avatar */}
         <div className="-mt-12 sm:-mt-16 mb-4">
           <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-white bg-border overflow-hidden shadow-lg">
             {user.avatar?.url ? (
@@ -307,7 +305,6 @@ export default function DashboardPage() {
                     ))}
                   </div>
                 ))}
-              {tab === 'favorites' && <Empty msg="No favorites yet." />}
               {tab === 'venues' &&
                 user.venueManager &&
                 (venues.length === 0 ? (
