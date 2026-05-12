@@ -39,3 +39,91 @@
     font-weight: 700;
   }
 }
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-semibold transition-colors duration-200 cursor-pointer;
+    font-family: var(--font-heading);
+    background-color: var(--color-primary);
+    color: white;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+  }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .btn-cta {
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-semibold transition-colors duration-200 cursor-pointer;
+    font-family: var(--font-heading);
+    background-color: var(--color-cta);
+    color: white;
+  }
+  .btn-cta:hover {
+    background-color: var(--color-cta-hover);
+  }
+  .btn-cta:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .card {
+    @apply rounded-xl border transition-shadow duration-200;
+    background-color: var(--color-surface);
+    border-color: var(--color-border);
+    box-shadow: 0 1px 3px 0 rgba(30, 58, 95, 0.08);
+  }
+  .card:hover {
+    box-shadow: 0 4px 16px 0 rgba(30, 58, 95, 0.12);
+  }
+
+  .input-field {
+    @apply w-full rounded-lg px-4 py-2.5 text-sm border transition;
+    border-color: var(--color-border);
+    color: var(--color-text-primary);
+    background: white;
+    font-family: var(--font-body);
+  }
+  .input-field:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.15);
+  }
+  .input-field::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+  }
+
+  .alert-error {
+    @apply p-3 rounded-lg text-sm;
+    background-color: rgba(192, 57, 43, 0.08);
+    border: 1px solid rgba(192, 57, 43, 0.2);
+    color: var(--color-error);
+  }
+  .alert-success {
+    @apply p-3 rounded-lg text-sm;
+    background-color: rgba(46, 139, 87, 0.08);
+    border: 1px solid rgba(46, 139, 87, 0.2);
+    color: var(--color-success);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-semibold transition-colors duration-200 cursor-pointer border;
+    font-family: var(--font-heading);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    background-color: var(--color-primary);
+    color: white;
+  }
+}
