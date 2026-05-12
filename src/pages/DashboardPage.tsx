@@ -248,7 +248,7 @@ export default function DashboardPage() {
                 setEditMode(false);
                 setSaveMsg('');
               }}
-              className="btn-outline px-6 py-2.5 rounded-lg"
+              className="flex gap-3 btn-outline px-6 py-2.5 rounded-lg"
             >
               Cancel
             </button>
