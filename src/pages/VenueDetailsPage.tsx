@@ -7,6 +7,9 @@ import type { Venue } from '../types/api';
 import { FiWifi } from 'react-icons/fi';
 import { BsCupHot } from 'react-icons/bs';
 import { MdLocalParking, MdPets } from 'react-icons/md';
+import { FiUser } from 'react-icons/fi';
+import { FaStar } from 'react-icons/fa';
+import { IoLocationSharp } from 'react-icons/io5';
 
 const FALLBACK =
   'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=60';
@@ -273,20 +276,10 @@ export default function VenueDetailsPage() {
               Number of guests
             </label>
             <div className="flex items-center bg-bg border border-border rounded-lg px-3 gap-2 focus-within:ring-2 focus-within:ring-secondary transition">
-              <svg
+              <FiUser
                 className="w-4 h-4 text-text-secondary shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
                 aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
-              </svg>
+              />
               <input
                 id="book-guests"
                 type="number"
@@ -390,14 +383,10 @@ export default function VenueDetailsPage() {
                     className="flex items-center gap-1 shrink-0"
                     aria-label={`${venue.rating} star rating`}
                   >
-                    <svg
+                    <FaStar
                       className="w-5 h-5 text-secondary"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
                       aria-hidden="true"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
+                    />
                     <span className="font-heading font-bold text-text-primary text-lg">
                       {venue.rating}
                     </span>
@@ -406,18 +395,10 @@ export default function VenueDetailsPage() {
               </div>
               {loc && (
                 <div className="flex items-center gap-1 mt-1">
-                  <svg
+                  <IoLocationSharp
                     className="w-4 h-4 text-cta shrink-0"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
                     aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  />
                   <span className="font-body text-sm text-text-secondary">
                     {loc}
                   </span>

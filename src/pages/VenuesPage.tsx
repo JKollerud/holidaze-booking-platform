@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { FiX } from 'react-icons/fi';
+import { FiX, FiLoader } from 'react-icons/fi';
 import { api } from '../services/api';
 import { venueService } from '../services/venueService';
 import type { ApiResponse, Venue } from '../types/api';
@@ -56,25 +56,7 @@ function Spinner({ label }: { label: string }) {
       className="flex flex-col items-center justify-center py-20 gap-4"
       role="status"
     >
-      <svg
-        className="w-10 h-10 animate-spin text-secondary"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle
-          className="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          strokeWidth="4"
-        />
-        <path
-          className="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8v8H4z"
-        />
-      </svg>
+      <FiLoader className="w-10 h-10 animate-spin text-secondary" />
       <p className="font-body text-sm text-text-secondary">{label}</p>
     </div>
   );
@@ -108,6 +90,7 @@ export default function VenuesPage() {
   const [allVenues, setAllVenues] = useState<Venue[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [pagedHasMore, setPagedHasMore] = useState(true);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [loadingAll, setLoadingAll] = useState(false);
@@ -119,6 +102,7 @@ export default function VenuesPage() {
     setAllVenues([]);
     setPage(1);
     setHasMore(true);
+    setPagedHasMore(true);
     setError('');
     setSort('default');
     setLoading(true);
@@ -128,12 +112,14 @@ export default function VenuesPage() {
         setPagedVenues(res.data);
         setAllVenues(res.data);
         setHasMore(false);
+        setPagedHasMore(false);
       } else {
         const res = await api.get<ApiResponse<Venue[]>>(
           `/holidaze/venues?limit=${PAGE_LIMIT}&page=1`,
         );
         setPagedVenues(res.data);
         setHasMore(!res.meta.isLastPage);
+        setPagedHasMore(!res.meta.isLastPage);
       }
     } catch {
       setError('Failed to load venues. Please try again.');
@@ -154,8 +140,15 @@ export default function VenuesPage() {
 
   const handleSortChange = async (newSort: SortOption) => {
     setSort(newSort);
-    if (newSort === 'default') return;
+
+    if (newSort === 'default') {
+      setHasMore(pagedHasMore);
+      return;
+    }
+
     if (allVenues.length > 0) return;
+
+    setPagedHasMore(hasMore);
     setLoadingAll(true);
     try {
       const all = await fetchAllVenues();
@@ -178,6 +171,7 @@ export default function VenuesPage() {
       setPagedVenues((prev) => [...prev, ...res.data]);
       setPage(nextPage);
       setHasMore(!res.meta.isLastPage);
+      setPagedHasMore(!res.meta.isLastPage);
     } catch {
       setError('Failed to load more venues.');
     } finally {
@@ -200,7 +194,7 @@ export default function VenuesPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
         <div>
           <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-text-primary">
-            {q ? `Results for "${q}"` : 'Holidaze Venues'}
+            {q ? `Results for "${q}"` : 'All venues'}
           </h1>
           <p className="font-body text-text-secondary text-sm mt-0.5">
             {loading
@@ -283,25 +277,7 @@ export default function VenuesPage() {
               >
                 {loadingMore ? (
                   <span className="flex items-center gap-2">
-                    <svg
-                      className="w-4 h-4 animate-spin"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      />
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8v8H4z"
-                      />
-                    </svg>
+                    <FiLoader className="w-4 h-4 animate-spin" />
                     Loading…
                   </span>
                 ) : (

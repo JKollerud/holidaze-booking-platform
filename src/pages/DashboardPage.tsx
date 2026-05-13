@@ -3,7 +3,7 @@ import { getStoredUser } from '../services/authService';
 import { profileService } from '../services/profileService';
 import { venueService } from '../services/venueService';
 import { bookingService } from '../services/bookingService';
-import type { Booking, Venue } from '../types/api';
+import type { Booking, Venue, Profile } from '../types/api';
 import VenueCard from '../components/venue/VenueCard';
 import VenueFormModal from '../components/venue/VenueFormModal';
 
@@ -31,22 +31,28 @@ export default function DashboardPage() {
   const [saveMsg, setSaveMsg] = useState('');
   const [showVenueForm, setShowVenueForm] = useState(false);
   const [editingVenue, setEditingVenue] = useState<Venue | undefined>();
+  const [profile, setProfile] = useState<Profile | null>(null);
 
   useEffect(() => {
     if (!user) return;
     Promise.all([
+      profileService.get(user.name),
       profileService.getBookings(user.name),
       user.venueManager
         ? profileService.getVenues(user.name)
         : Promise.resolve({ data: [] as Venue[] }),
     ])
-      .then(([b, v]) => {
+      .then(([p, b, v]) => {
+        setProfile(p.data);
+        setBio(p.data.bio ?? '');
+        setAvatarUrl(p.data.avatar?.url ?? '');
+        setBannerUrl(p.data.banner?.url ?? '');
         setBookings(b.data);
         setVenues(v.data);
       })
       .catch(console.error)
       .finally(() => setLoading(false));
-  }, [user]);
+  }, [user?.name]);
 
   if (!user)
     return (
@@ -68,6 +74,18 @@ export default function DashboardPage() {
         ...(bannerUrl ? { banner: { url: bannerUrl, alt: '' } } : {}),
       });
       setSaveMsg('Profile updated!');
+      setProfile((prev) =>
+        prev
+          ? {
+              ...prev,
+              bio,
+              avatar: avatarUrl
+                ? { url: avatarUrl, alt: user.name }
+                : prev.avatar,
+              banner: bannerUrl ? { url: bannerUrl, alt: '' } : prev.banner,
+            }
+          : prev,
+      );
       setEditMode(false);
     } catch (err) {
       setSaveMsg(err instanceof Error ? err.message : 'Failed to save.');
@@ -149,6 +167,11 @@ export default function DashboardPage() {
             <p className="font-body text-sm text-text-secondary">
               {user.email}
             </p>
+            {profile?.bio && (
+              <p className="font-body text-sm text-text-primary mt-1">
+                {profile.bio}
+              </p>
+            )}
           </div>
           <div className="flex items-center gap-3">
             <button
