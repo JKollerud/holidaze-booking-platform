@@ -9,7 +9,13 @@ import VenueCard from '../components/venue/VenueCard';
 const PAGE_LIMIT = 9;
 const FETCH_ALL_LIMIT = 100;
 
-type SortOption = 'default' | 'price-asc' | 'price-desc' | 'rating' | 'guests';
+type SortOption =
+  | 'default'
+  | 'price-asc'
+  | 'price-desc'
+  | 'rating'
+  | 'guests'
+  | 'newest';
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: 'default', label: 'Default' },
@@ -17,6 +23,7 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: 'price-desc', label: 'Price: High to Low' },
   { value: 'rating', label: 'Top Rated' },
   { value: 'guests', label: 'Most Guests' },
+  { value: 'newest', label: 'Newest First' },
 ];
 
 function sortVenues(venues: Venue[], sort: SortOption): Venue[] {
@@ -30,6 +37,10 @@ function sortVenues(venues: Venue[], sort: SortOption): Venue[] {
       return copy.sort((a, b) => b.rating - a.rating);
     case 'guests':
       return copy.sort((a, b) => b.maxGuests - a.maxGuests);
+    case 'newest':
+      return copy.sort(
+        (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime(),
+      );
     default:
       return copy;
   }
